@@ -1,70 +1,91 @@
-export CLICOLOR=1
-export LSCOLORS=ExFxCxDxBxegedabagacad
-export TERM=xterm-color 
-export GREP_OPTIONS='--color=auto' GREP_COLOR='1;32'
-
-alias ls='ls -G'  
-alias ll='ls -hlatr --color'
-alias gg='history | grep'
-#alias vim='~/Applications/MacVim.app/Contents/MacOS/Vim'
-alias breakitdown="history | awk '{a[$2]++ } END{for(i in a){print a[i] ' ' i}}'|sort -rn |head -n 20"
-alias cleanpyc='find . -type f -name "*.pyc" -delete'
-alias startpost='pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start'
-alias stoppost='pg_ctl -D /usr/local/var/postgres stop -s -m fast'
-
-alias pms='python manage.py runserver'
-alias pmsh='python manage.py shell'
-alias pmdb='python manage.py dbshell'
-
-
-export GIT_EDITOR="vim" 
-GIT_PS1_SHOWDIRTYSTATE=true
-export PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME%%.*}: ${PWD/#$HOME/~}\007"'
-export COMMAND_MODE=unix2003
-export TM_PYCHECKER=pylint
-
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
-export EDITOR="vim"
+# don't put duplicate lines in the history. See bash(1) for more options
+# don't overwrite GNU Midnight Commander's setting of `ignorespace'.
+HISTCONTROL=$HISTCONTROL${HISTCONTROL+,}ignoredups
+# ... or force ignoredups and ignorespace
+HISTCONTROL=ignoreboth
 
-#borrowed from MITSUHIKO
-MY_DEFAULT_COLOR="[00m"
-MY_GRAY_COLOR="[37m"
-MY_PINK_COLOR="[35m"
-MY_GREEN_COLOR="[32m"
-MY_ORANGE_COLOR="[33m"
-MY_RED_COLOR="[31m"
-if [ `id -u` == '0' ]; then
-  MY_USER_COLOR=$MY_RED_COLOR
-else
-  MY_USER_COLOR=$MY_PINK_COLOR
+# append to the history file, don't overwrite it
+shopt -s histappend
+
+# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
+
+# check the window size after each command and, if necessary,
+# update the values of LINES and COLUMNS.
+shopt -s checkwinsize
+
+# make less more friendly for non-text input files, see lesspipe(1)
+[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+
+# set variable identifying the chroot you work in (used in the prompt below)
+if [ -z "$debian_chroot" ] && [ -r /etc/debian_chroot ]; then
+    debian_chroot=$(cat /etc/debian_chroot)
 fi
 
-export MY_BASEPROMPT='\e${MY_USER_COLOR}\u\
-\e${MY_GRAY_COLOR}@\e${MY_ORANGE_COLOR}\h \
-\e${MY_GRAY_COLOR}in \e${MY_GREEN_COLOR}\w\
-\e${MY_GRAY_COLOR}$(__git_ps1)\e${MY_DEFAULT_COLOR}'
-export PS1="${MY_BASEPROMPT}
-$ "
+# set a fancy prompt (non-color, unless we know we "want" color)
+case "$TERM" in
+    xterm-color) color_prompt=yes;;
+esac
+
+# If this is an xterm set the title to user@host:dir
+case "$TERM" in
+xterm*|rxvt*)
+    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
+    ;;
+*)
+    ;;
+esac
+
+# enable color support of ls and also add handy aliases
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    alias ls='ls -G --color=auto'
+
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
+fi
+
+# Alias definitions.
+# You may want to put all your additions into a separate file like
+# ~/.bash_aliases, instead of adding them here directly.
+# See /usr/share/doc/bash-doc/examples in the bash-doc package.
+
+alias c="clear"
+alias j="jobs"
+alias l='ls -lArt'
+alias h="history"
+alias gg='history | grep'
+alias ll="ls -lrt"
+alias lsd="ls -ld .*/"
+alias dot='ls .[a-zA-Z0-9_]*' 
+alias breakitdown="history | awk '{a[$2]++ } END{for(i in a){print a[i] ' ' i}}'|sort -rn |head -n 20"
+
+# enable programmable completion features (you don't need to enable
+# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
+# sources /etc/bash.bashrc).
+if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
+    . /etc/bash_completion
+fi
+
+psgrep()
+{
+        ps -aux | grep $1 | grep -v grep
+}
+
+export GIT_EDITOR="vim" 
+export EDITOR="vim"
+
 export HISTSIZE=100000
 export HISTFILESIZE=100000
 export HISTCONTROL=ignoreboth
 export HISTIGNORE="&:[ ]*:ls:ll:la:l:cd:pwd:exit:mc:su:df:clear"
 
-export WORKON_HOME=$HOME/.virtualenv
-export VIRTUALENVWRAPPER_PYTHON=/usr/local/Cellar/python/2.7.3/bin/python
-export PIP_VIRTUALENV_BASE=$WORKON_HOME
-export PIP_RESPECT_VIRTUALENV=true
-export PROJECT_HOME=$HOME/Develop
-if [[ -r /usr/local/share/python/virtualenvwrapper.sh ]]; then
-    source /usr/local/share/python/virtualenvwrapper.sh
-else
-    echo "WARNING: Can't find virtualenvwrapper.sh"
-fi
+#paths
 
-### Added by the Heroku Toolbelt
-export PATH="/usr/local/heroku/bin:$PATH"
-
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
-alias tmux="TERM=screen-256color-bce tmux"
+PATH=$PATH:~/bin
+export PATH
+export PATH=/home/fabio/bin/Sencha/Cmd/4.0.0.203:$PATH
+export SENCHA_CMD_3_0_0=$HOME/io/bin/Sencha/Cmd/4.0.0.203
