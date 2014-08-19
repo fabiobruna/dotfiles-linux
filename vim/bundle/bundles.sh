@@ -74,13 +74,6 @@ git clone "git://github.com/kien/rainbow_parentheses.vim.git"
 # Comment Toggling
 git clone "git@github.com:scrooloose/nerdcommenter.git"
 
-# Python:
-# PyTest Support
-git clone "git://github.com/alfredodeza/pytest.vim.git"
-
-# JEDI support
-git clone "git@github.com:davidhalter/jedi-vim.git"
-
 # Markdown:
 # Vim Markdown runtime files
 git clone "git://github.com/tpope/vim-markdown.git"
@@ -108,24 +101,12 @@ git clone "git://github.com/gregsexton/MatchTag.git"
 # Provides sgml (xml, html, etc.) end tag completion
 git clone "git://github.com/ervandew/sgmlendtag.git"
 
-# Templating:
-# Vim plugin for Handlebars
-git clone "git://github.com/nono/vim-handlebars.git"
-
 # CSS:
 # Vim runtime files for Haml, Sass, and SCSS
 git clone "git://github.com/tpope/vim-haml.git"
 
 # Add extra syntax highlighting for SCSS files
 git clone "git://github.com/cakebaker/scss-syntax.vim.git"
-
-# Nginx:
-# Syntax highlighting for nginx configuration files
-git clone "git://github.com/mutewinter/nginx.vim.git"
-
-# Tmux:
-# Syntax highlighting for tmux configuration files
-git clone "git://github.com/acustodioo/vim-tmux.git"
 
 # Themes And Appearance:
 # Colorsheme Scroller, Chooser, and Browser
