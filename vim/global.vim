@@ -1,7 +1,6 @@
 " General Settings:
 scriptencoding utf-8                      " UTF8 All day, every day
 set encoding=utf-8                        " UTF8 All day, every day
-set directory=/tmp/                       " Set temporary directory (don't litter local dir with swp/tmp files)
 set timeout timeoutlen=300                " Do not wait so long for extra keystrokes
 set history=1000                          " Remeber the last 1000 Ex commands
 set lazyredraw
@@ -91,9 +90,9 @@ set nojoinspaces                          " Only insert single space after a '.'
 
 " Tabs:
 set expandtab                             " Use Indents Of Two Spaces And Have Them Copied Down Lines:
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
+set tabstop=2
+set softtabstop=2
+set shiftwidth=2
 set shiftround                            " Round indent by a multiple of shiftwidth in indent mode
 set cpoptions+=I                          " Do Not Remove Empty Tabs:
 
@@ -105,7 +104,7 @@ set numberwidth=4                         " Set line number column width
 set splitbelow                            " Open new horizontal split windows below current
 set splitright                            " Open new vertical split windows to the right
 set autoread                              " Set to auto read when a file is changed from the outside
-set autowrite                             " Write Files On Buffer Change
+" set autowrite                             " Write Files On Buffer Change
 set hidden                                " Allow Unfocusing Of A Buffer With Changes
 
 " Completion Configuration:
