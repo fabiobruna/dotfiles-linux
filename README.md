@@ -1,18 +1,11 @@
-# JAM dotfiles
+# dotfiles
 
-This is my collection of dot files for my linux systems.
-They are HIGHLY OPINIONATED!
+Fork van https://github.com/jasonamyers/dotfiles-linux
 
-To use them:
+Gebruik:
 
-* git clone it into your home directory
-* rename your current .bash_profile .bashrc .vim .vimrc
-* run setup.sh
+* git clone in home dir
+* optioneel: hernoem .bash_profile .bashrc .vim .vimrc
+* voer setup.sh uit
 
-# Setup Xmonad
-* git clone git@github.com:davidbrewer/xmonad-ubuntu-conf.git ~/.xmonad
-* ~/.xmonad/install-xmonad
-
-# Setup Emacs
-This is mostly handled by the setup.sh script; however, you need to start emacs and run:
-* M-x jedi:install-server
+Werk in uitvoering
