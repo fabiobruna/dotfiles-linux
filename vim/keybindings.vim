@@ -61,10 +61,10 @@ nnoremap <silent> ss <C-w>s
 "inoremap <Down> <NOP>
 "inoremap <Left> <NOP>
 "inoremap <Right> <NOP>
-noremap <Up> <NOP>
-noremap <Down> <NOP>
-noremap <Left> <NOP>
-noremap <Right> <NOP>
+"noremap <Up> <NOP>
+"noremap <Down> <NOP>
+"noremap <Left> <NOP>
+"noremap <Right> <NOP>
 
 " Refresh Vim In Various Ways:
 nnoremap <silent> <leader>r :call g:PersonalVim_Refresh()<CR>
