@@ -60,8 +60,9 @@ alias h="history"
 alias gg='history | grep'
 alias ll="ls -lrt"
 alias lsd="ls -ld .*/"
-alias dot='ls .[a-zA-Z0-9_]*' 
+alias dot='ls .[a-zA-Z0-9_]*'
 alias breakitdown="history | awk '{a[$2]++ } END{for(i in a){print a[i] ' ' i}}'|sort -rn |head -n 20"
+alias ack='ack-grep'
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
@@ -75,7 +76,7 @@ psgrep()
         ps -aux | grep $1 | grep -v grep
 }
 
-export GIT_EDITOR="vim" 
+export GIT_EDITOR="vim"
 export EDITOR="vim"
 
 export HISTSIZE=100000
