@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<GarminPlugin logfile="" level="ERROR">
+    <Devices>
+        <Device enabled="false">
+            <Name>Home Directory /home/fabio</Name>
+            <StoragePath>/home/fabio</StoragePath>
+            <StorageCommand></StorageCommand>
+            <FitnessDataPath></FitnessDataPath>
+            <GpxDataPath></GpxDataPath>
+        </Device>
+    </Devices>
+    <Settings>
+        <ScanMounted enabled="true" />
+        <ForerunnerTools enabled="true" />
+        <BackupWorkouts enabled="false" path="/home/fabio/Dropbox/Workouts/&lt;YEAR&gt;/&lt;MONTH&gt;/" />
+    </Settings>
+</GarminPlugin>
