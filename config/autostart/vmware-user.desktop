@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Encoding=UTF-8
+Exec=/usr/bin/vmware-user-suid-wrapper
+Name=VMware User Agent
+# KDE bug 190522: KDE does not autostart items with NoDisplay=false...
+# NoDisplay=false
+X-KDE-autostart-phase=1
+
+Hidden=true

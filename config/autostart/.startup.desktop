@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Exec=/home/fabio/.startup
+Hidden=false
+NoDisplay=false
+X-GNOME-Autostart-enabled=true
+Name[nl_NL]=Mounten NAS
+Name=Mounten NAS
+Comment[nl_NL]=Mounten NAS
+Comment=Mounten NAS

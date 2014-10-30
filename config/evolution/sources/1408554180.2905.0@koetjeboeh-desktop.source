@@ -1,0 +1,21 @@
+[Data Source]
+DisplayName=koetjeboeh@gmail.com
+Enabled=true
+Parent=
+
+[Ubuntu Online Accounts]
+AccountId=1
+
+[Collection]
+BackendName=google
+CalendarEnabled=false
+ContactsEnabled=false
+Identity=koetjeboeh@gmail.com
+MailEnabled=true
+
+[Authentication]
+Host=
+Method=none
+Port=0
+RememberPassword=true
+User=
