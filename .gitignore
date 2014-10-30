@@ -37,6 +37,9 @@ venv/
 viminfo
 tags
 bundle
+config/google-chrome
+config/spotify
+config/pulse
 
 virtualenv
 emacs.d
