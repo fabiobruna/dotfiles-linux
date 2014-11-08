@@ -56,6 +56,7 @@ fi
 alias c="clear"
 alias j="jobs"
 alias l='ls -lArt'
+alias shuf='python rand.py'
 alias h="history"
 alias gg='history | grep'
 alias ll="ls -lrt"
