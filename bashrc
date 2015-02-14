@@ -91,3 +91,4 @@ PATH=$PATH:~/bin
 export PATH
 export PATH=/home/fabio/bin/Sencha/Cmd/4.0.0.203:$PATH
 export SENCHA_CMD_3_0_0=$HOME/io/bin/Sencha/Cmd/4.0.0.203
+PATH=$PATH:/usr/local/bin
