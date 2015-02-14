@@ -1,0 +1,15 @@
+<snippet>
+	<content><![CDATA[
+function doLog(\$text) {
+  // open log file
+  \$filename = "test.log";
+  \$fh = fopen(\$filename, "a") or die("Could not open log file.");
+  fwrite(\$fh, date("d-m-Y, H:i")." - \$text\n") or die("Could not write file!");
+  fclose(\$fh);
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>php-fnc-log</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.php</scope>
+</snippet>

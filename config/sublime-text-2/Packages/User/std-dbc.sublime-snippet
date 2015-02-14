@@ -1,0 +1,65 @@
+<snippet>
+	<content><![CDATA[
+
+drop table #dbc
+select * into #dbc
+from (
+select
+  t00.dbc_nummer,
+  t00.patientnummer,
+  t00.dbc_typering,
+  cast(t00.dbc_begindatum as date) as dbc_begindatum,
+  cast(t00.dbc_einddatum as date) as dbc_einddatum,
+  t00.agb_specialisme_nr,
+  case when t00.specialisme_bedrijfsinfo is null
+       then t00.specialisme_omschr
+       else t00.specialisme_bedrijfsinfo
+       end                                       as specialisme_omschr,
+  t00.specialisme_code,
+  t00.zorgtype_code,
+  t00.zorgtype_omschr,
+  t00.zorgvraag_code,
+  t00.zorgvraag_omschr,
+  t00.diagnose_code,
+  t00.diagnose_omschr,
+  t00.diagnosegroep_code,
+  t00.diagnosegroep_omschr,
+  t00.behandeling_code,
+  t00.behandelgroep_code,
+  t00.behandeling_omschr,
+  t00.dbc_status,
+  CAST(CASE 
+      when (t00.dbc_einddatum <= getdate() ) 
+       then (ISNULL(t00.omzet_ziekenhuis_excl_decl,0) + ISNULL(t00.sluittarief_decl,0)) 
+               else 0
+              end 
+              + ISNULL(t00.mut_omzet_ziekenhuis_excl_ohw,0) 
+         AS decimal(13,2)
+        ) as [dbc omzet],
+  t00.dwh_kostprijs_dbc_p kosten_P, 
+  t00.dwh_kostprijs_dbc_a kosten_A, 
+  t00.dwh_kostprijs_dbc_m kosten_M, 
+  t00.dwh_kostprijs_dbc_o kosten_O, 
+  t00.dwh_kostprijs_dbc_i kosten_I,
+  t00.aantal_dbcs,
+  t10.zorgproduct,
+  t20.lekenomschrijving,
+  t20.latijnseomschrijving
+from dbg_bedrijfsinfo_dbcs t00
+ join dbg_bedrijfsinfo_dbcs_ext t10
+  on t00.dbc_nummer = t10.dbc_nummer
+ left join dim_zorgproducten t20
+  on t10.zorgproduct = t20.zorgproduct
+  and t00.dbc_begindatum between t20.begindatum and t20.einddatum
+) t1
+
+select *
+from #dbc
+order by dbc_begindatum
+
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>std-dbc</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.sql</scope>
+</snippet>

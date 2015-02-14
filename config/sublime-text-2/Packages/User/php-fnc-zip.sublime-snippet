@@ -1,0 +1,24 @@
+<snippet>
+	<content><![CDATA[
+function packFile($filename, $password) {
+        $out = $filename.'.zip';
+        $in = $filename;
+        //header("Content-type: application/octet-stream");   
+        //header("Content-disposition: attachment; filename=$outfile");    
+        if($password) {
+          $command = "7za a -tzip -p$password $out $in";
+          @system($command);    
+          @unlink($infile);
+        } else {
+          $command = "7za a -tzip $out $in";
+          @system($command);    
+          @unlink($infile);          
+        }
+
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>php-fnc-zip</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.php</scope> 
+</snippet>

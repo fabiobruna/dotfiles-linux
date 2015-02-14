@@ -1,0 +1,44 @@
+<snippet>
+	<content><![CDATA[
+
+-- Let op, voor apotheek, gebruik apotheek script
+
+drop table #medicat
+select * into #medicat from (
+select
+  t00.patientnr, 
+  t20.patient_naam, 
+  t10.medcd, 
+  t00.schemcd, 
+  cast(t00.vrschrdat as date) voorschrijfdatum, 
+  t00.medicoms, 
+  t00.schemaoms as dosering, 
+  t00.toedoms as toedieningsweg, 
+  t00.groepoms, 
+  cast(convert(char(10), t00.accdat, 120 )+' '+t00.acctd as datetime) [ACC startdatum], 
+  cast(convert(char(10), t00.aaccdat, 120 )+' '+t00.aacctd as datetime) [AACC startdatum], 
+  cast(t00.actstopdt as date) [ACT stopdatum], 
+  cast(convert(char(10), t00.mutdat, 120 )+' '+muttijd as datetime) as [mutatie datum], 
+  cast(convert(char(10), t30.startdat, 120 )+' '+t30.starttijd as datetime) as [schema start datum], 
+  cast(convert(char(10), t30.einddat, 120 )+' '+t30.eindtijd as datetime) as [schema eind datum]
+from [nt-dk-mn-zis-p1].ezis_prod_logshipping.dbo.medicat_recdeel t00
+ join  [nt-dk-mn-zis-p1].ezis_prod_logshipping.dbo.medicat_medicijn t10
+  on t00.medcd = t10.code
+ join dim_patient t20
+  on t00.patientnr = t20.patientnummer
+ join [nt-dk-mn-zis-p1].ezis_prod_logshipping.dbo.MEDICAT_SCHEMA t30
+  on t00.schemcd =  t30.code
+where t00.patientnr in ('')
+-- and t00.medcd in ( '0000174412', '0000074799' )
+) t2
+
+select *
+from #medicat
+order by [schema start datum]
+
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>std-apo-medicat</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.sql</scope>
+</snippet>

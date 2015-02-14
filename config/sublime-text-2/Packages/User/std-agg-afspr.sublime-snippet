@@ -1,0 +1,43 @@
+<snippet>
+	<content><![CDATA[
+
+drop table #agenda
+select * into #agenda
+from (
+select distinct
+	t00.patientnr,
+	cast(t00.DATUM as date) datum,
+	t00.agenda [Agenda code],
+	t30.OMSCHR [Agenda oms],
+	t00.subagenda [Subagenda code],
+	t20.naam [Subagenda naam],
+	t20.omschr as [Subagenda oms],
+	t00.code as [type afspraak code],
+	t10.omschr [type afspraak oms],
+	t00.constype as consulttype
+from ezis_agenda_afspraak t00
+ left join ezis_agenda_afspcode t10
+  on t00.agenda = t10.agenda
+   and t00.code = t10.code
+   and t10.vervallen = 0
+ left join ezis_agenda_subagend t20
+  on t00.subagenda = t20.subagenda
+ left join ezis_agenda_agenda t30
+  on t00.agenda = t30.agenda
+where t00.AGENDA in ('..', '..')
+	and t00.CONSTYPE = '..' -- eerste consult bijvoorbeeld
+	and t00.code = '' --afspraakcode
+	and t00.datum between .. and ..
+	and t00.voldaan = 'J' -- alleen doorgegaan
+ ) t1
+
+ select *
+ from #agenda
+ order by datum
+
+ ]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>std-agg-afspr</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.sql</scope>
+</snippet>

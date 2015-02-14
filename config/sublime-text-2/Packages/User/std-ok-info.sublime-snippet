@@ -1,0 +1,59 @@
+<snippet>
+	<content><![CDATA[
+drop table #corrspec
+select * into #corrspec from (
+select 
+  t00.operatienr, 
+  t20.specialism
+from ezis_ok_okver t00
+join (select t00.operatienr, min(t00.autoid) autoid 
+       from ezis_ok_okver t00
+        join ezis_cszislib_arts t10
+        on t10.artscode = t00.specialist
+        where t10.specialism <> 'ANA' 
+       group by t00.operatienr
+     ) B 
+ on t00.autoid = b.autoid
+ left join ezis_cszislib_arts t20 
+  on t20.artscode = t00.specialist     
+) t0
+
+drop table #oper
+select * into #oper
+from (
+select distinct
+  t00.zkh_nr as patientnummer, 
+  t00.zkhloccode as locatie_operatie, 
+  t00.prioriteit,
+  t00.aanvr_spec aanvrager,
+  t20.arts_achternaam aanvrager_naam,
+  t00.snijd_spec snijder,
+  t30.arts_achternaam as snijder_naam,
+  t00.status,
+  cast(t00.operatie_d as date) as ok_datum, 
+  case when isnull(t10.specialism, '') = '' 
+       then t00.specialism 
+       else t10.specialism end as specialisme
+from ezis_ok_okinfo t00
+ left join #corrspec t10
+  on t00.operatienr = t10.operatienr
+ left join ezis_specialisten t20
+  on t00.aanvr_spec = t20.arts_code
+ left join ezis_specialisten t30
+  on t00.snijd_spec = t30.arts_code
+where year(t00.operatie_d) = 2010
+ and case when isnull(t10.specialism, '') = '' 
+          then t00.specialism 
+          else t10.specialism end = 'GYN'
+) t1
+
+select *
+from #oper
+order by ok_datum
+
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>std-ok-info</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.sql</scope>
+</snippet>

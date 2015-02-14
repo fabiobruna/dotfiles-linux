@@ -1,0 +1,14 @@
+<snippet>
+	<content><![CDATA[
+
+drop table #dbc_opn
+select * into #dbc_opn from (
+select distinct plannr, dbcnummer from ver_opname_info
+) t0
+
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>std-opn-dbcinfo</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.sql</scope>
+</snippet>

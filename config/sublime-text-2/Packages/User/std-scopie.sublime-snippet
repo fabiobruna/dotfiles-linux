@@ -1,0 +1,20 @@
+<snippet>
+	<content><![CDATA[
+drop table #scopie
+select * into #scopie
+from (
+select t00.patientnr, min(cast(t10.bdateondrz as date)) as datum
+ from [nt-dk-mn-zis-p1].ezis_prod_logshipping.dbo.multimed_multmdoc t00
+ join [nt-dk-mn-zis-p1].ezis_prod_logshipping.dbo.multimed_mulgroep t10
+  on t00.groepid = t10.mulgroepid
+ join #dbc t20
+  on t00.patientnr = t20.patientnummer
+where year(t10.bdateondrz) in ( '..', '..' )
+group by t00.patientnr
+) t1  
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>std-scopie</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.sql</scope>
+</snippet>

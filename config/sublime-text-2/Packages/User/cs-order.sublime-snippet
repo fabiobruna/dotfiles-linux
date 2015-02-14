@@ -1,0 +1,43 @@
+<snippet>
+	<content><![CDATA[
+
+drop table #orders
+select * into #order
+from (
+select
+ t00.patientnr,
+ t00.ordernr,
+ t10.orderdefnr,
+ t10.OMSCHR as [orderdef oms],
+ t10.categorie as [orderdef cat],
+ t00.dbcnummer,
+ cast(t00.startdatum as date) startdatum,
+ t00.starttijd,
+ t00.startdatum+t00.starttijd as startdatumtijd,
+ t20.omschr,
+ t30.OMSCHR as prioriteit,
+ isnull(case when t40.achternaam = '' and t40.geslacht = 'V' then t40.meisjesnaa
+             when t40.achternaam != '' and t40.meisjesnaa != '' and t40.geslacht = 'V' then t40.achternaam + ' - ' + t40.meisjesnaa
+             else t40.achternaam end, '') as aanvragerartsnaam
+ , t40.specialism
+ , t10.actieomsch
+from ordercom_order t00
+ join ordercom_orddef t10
+ on t00.orderdefnr = t10.orderdefnr
+ join ordercom_ordcat t20
+  on t10.categorie = t20.categorie
+ join ordercom_prioriteit t30
+  on t00.prioriteit = t30.code
+ join cszislib_arts t40
+  on t00.aanvrager = t40.artscode
+) t1
+
+select *
+from #orders
+order by startdatumtijd  
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>std-csorder</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.sql</scope>
+</snippet>
