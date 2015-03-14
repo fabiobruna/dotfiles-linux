@@ -1,0 +1,13 @@
+<snippet>
+	<content><![CDATA[
+
+if  exists (select * from sys.indexes where object_id = object_id(N'[dbo].[tabelnaam]') and name = N'indexnaam')
+drop index [indexnaam] on [dbo].tabelnaam with ( online = off )
+go
+
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>t-sql-drop-index</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.sql</scope>
+</snippet>

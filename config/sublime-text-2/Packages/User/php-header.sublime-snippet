@@ -1,0 +1,17 @@
+<snippet>
+	<content><![CDATA[
+/* ==================================================================== <HEADER>
+ * Title       : $TM_FILENAME
+ * Description : 
+ * =========================================================== <PROGRAM HISTORY>
+ * Changes in git zie http://dwh.mch.nl/gitphp/?sort=age
+ * ===================================================================== <NOTES>
+ *
+ * ==================================================================== <SOURCE>
+ */
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>hphp</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.php</scope> -->
+</snippet>

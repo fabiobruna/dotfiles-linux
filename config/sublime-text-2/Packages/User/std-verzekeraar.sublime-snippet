@@ -1,0 +1,39 @@
+<snippet>
+	<content><![CDATA[
+
+declare @verzekeraar varchar(10)
+declare @inkoopcombinatie varchar(10)
+
+drop table #tmp
+select * into #tmp
+from (
+select distinct t10.dbc_nummer,
+       t10.patientnummer,
+       t10.verrichtingsdatum,
+ ( select top 1 autoid 
+   from EZIS_PATIENT_PATHIST 
+    where INGANGSDAT <= t10.verrichtingsdatum
+    and PATIENTNR = t10.patientnummer
+order by autoid desc
+)         as autoid  
+,         @verzekeraar as verzekeraar
+from ver_uitgev_verrichtingen t10   
+-- where t10.specialisme_code_uitvoerder = 'KAA'
+-- and t10.dbc_nummer <> 0
+) t0
+
+update    #tmp
+set       verzekeraar = 
+          (
+          select PARTVERZ 
+          from   EZIS_PATIENT_PATHIST s1
+          where  s1.AutoID = #tmp.autoid
+          )
+where     autoid is not null
+
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>std-verzekeraar</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.sql</scope>
+</snippet>

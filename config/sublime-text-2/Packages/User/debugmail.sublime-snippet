@@ -1,0 +1,30 @@
+<snippet>
+	<content><![CDATA[
+
+foreach ( $row as $key => $value )
+{
+    $row[$key] = $value;
+}
+
+$row = implode( "\n", $row );
+
+$to      = 'f.bruna@mchaaglanden.nl';
+$from    = 'datawarehouse@mchaaglanden.nl';
+
+$headers = '';
+$headers .= "To: $to";
+$headers .= "\r\nMIME-Version: 1.0";
+$headers .= "\r\nContent-Type: text/html; charset=utf-8";
+
+if (isset($cc)) $headers .= "\r\nCc: $cc";
+if (isset($bcc)) $headers .= "\r\nBcc: $bcc";
+$headers .= "\r\nFrom: $from";
+
+mail('f.bruna@mchaaglanden.nl', 'test', $row, $headers);"
+
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>debugmail</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.php</scope>
+</snippet>

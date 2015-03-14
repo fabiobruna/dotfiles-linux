@@ -1,0 +1,34 @@
+<snippet>
+  <content><![CDATA[
+
+drop table #operopn
+select * into #operopn
+from (
+select 
+  ok.OPERATIENR operatienummer, 
+  dateadd(MI, ok.T_OKCOMPLX, ok.OPERATIE_D ) operatiedatumtijd,
+  opn.PLANNR opnamenummer, 
+  cast(opn1.opndat as date) opnamedatum,
+  cast(opn1.ONTSLDAT as date) ontslagdatum,
+  opn.INGDAT+opn.INGTIJD ingangsdatumtijd,  
+  opn.EINDDAT+opn.EINDTIJD as einddatumtijd, 
+  opn.AFDELING
+from ezis_OK_OKINFO ok
+join EZIS_OPNAME_OPNAME opn1
+  on ok.ZKH_NR = opn1.PATIENTNR
+    and ok.OPERATIE_D between opn1.OPNDAT and opn1.ONTSLDAT
+join ezis_OPNAME_OPNMUT opn
+  on opn1.PLANNR = opn.PLANNR
+  and dateadd(MI, ok.T_OKCOMPLX, ok.OPERATIE_D ) between opn.ingdat+opn.ingtijd and opn.EINDDAT + opn.EINDTIJD
+) t1
+
+select *
+from #operopn
+order by operatiedatumtijd
+
+]]></content>
+  <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+  <tabTrigger>ok-opn-mut-afd</tabTrigger>
+  <!-- Optional: Set a scope to limit where the snippet will trigger -->
+  <scope>source.sql</scope>
+</snippet>

@@ -1,0 +1,25 @@
+<snippet>
+  <content><![CDATA[
+select 
+    t00.rec_id,
+    t00.user_code,
+    t00.email,
+    t00.login_laatste_dat,
+    t00.login_aantal,
+    count(distinct t10.rec_id_items) [aantal items]
+from [nt-vm-dwh-p2].dwh_general.dbo.aut_users t00
+  left join [nt-vm-dwh-p2].dwh_general.dbo.aut_users_has_items t10
+   on t00.rec_id = t10.rec_id_users
+group by 
+    t00.rec_id,
+    t00.user_code,
+    t00.email,
+    t00.login_laatste_dat,
+    t00.login_aantal
+   
+]]></content>
+  <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+  <tabTrigger>aut-user-info</tabTrigger> 
+  <!-- Optional: Set a scope to limit where the snippet will trigger -->
+  <!-- <scope>source.python</scope> -->
+</snippet>

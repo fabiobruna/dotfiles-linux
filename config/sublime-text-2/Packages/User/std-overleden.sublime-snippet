@@ -1,0 +1,23 @@
+<snippet>
+	<content><![CDATA[
+drop table #overleden
+select * into #overleden
+from (
+select patientnr
+from ezis_opname_opname
+ where bestemming IN ('B','D')
+  and status = 5
+  and patientnr in (..)
+union
+select patientnummer
+from dim_patient
+where overleden_ind = 'T'
+  and patientnummer in (..)
+) t1
+
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>std-overleden</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.sql</scope>
+</snippet>

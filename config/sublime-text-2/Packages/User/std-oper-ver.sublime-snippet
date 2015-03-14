@@ -1,0 +1,25 @@
+<snippet>
+	<content><![CDATA[
+-- Operaties uit verr. Let op: bevat niet alle operatieve verrichtingen(geen correcties)
+drop table #operaties
+select * into #operaties from (
+select
+  t00.dbc_nummer,
+  t00.patientnummer,
+  cast(t00.verrichtingsdatum as date) verrichtingsdatum,
+  t00.cbv_verrichting_code,
+  t10.cbv_verrichting_omschr,
+  t10.ctg_verrichting_code,
+  t10.ctg_verrichting_omschr
+from ver_uitgev_verrichtingen t00
+ join dim_cbv_verrichting t10
+  on t00.cbv_verrichting_code = t10.cbv_verrichting_code
+where t10.ctg_klasse_code = 5
+ and t00.verrichtingsdatum between '..' AND '..'
+) t1
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>std-oper-ver</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.sql</scope>
+</snippet>

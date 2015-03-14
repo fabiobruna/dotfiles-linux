@@ -1,0 +1,27 @@
+<snippet>
+	<content><![CDATA[
+-- Operaties uit faktuur. Zou de complete set moeten zijn
+drop table #operaties
+select * into #operaties from (
+select
+  t00.PATIENTNR as patientnummer,
+  cast(t00.DATUM as date) verrichtingsdatum,
+  t10.CODE cbv_verrichting_code,
+  t10.SPECIALISM as specialisme_code_uitvoerder,
+  t20.cbv_verrichting_omschr,
+  t20.ctg_verrichting_code,
+  t20.ctg_verrichting_omschr
+from  ezis_faktuur_verricht t00
+ join ezis_faktuur_verrsec  t10
+  on t00.id = t10.id
+ join dim_cbv_verrichting t20
+  on t10.CODE = t20.cbv_verrichting_code
+where t20.ctg_klasse_code = 5
+ and t00.DATUM between '20130101' AND '20131231'
+) t1
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>std-oper-fakt</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.python</scope> 
+</snippet>

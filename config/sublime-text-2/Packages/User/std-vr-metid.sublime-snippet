@@ -1,0 +1,32 @@
+<snippet>
+	<content><![CDATA[
+
+drop table #vragen
+select * into #vragen
+from (
+select
+  t00.patientnr,
+  cast(t00.datum as date) datum,
+  t20.stelling,
+  cast(t00.antwoord as varchar(4000)) as antwoord,
+  t30.omschr as keuzelijst,
+  t00.objalias,
+  t00.objid,
+  t00.opslagid,
+  t00.realvrid,
+  t20.keuzelijst,
+  t00.beantwid
+from vrlijst_vropslg t00
+ join vrlijst_vragen t20
+  on t00.realvrid = t20.vraagid
+ join vrlijst_keuzelst t30
+  on cast(t00.antwoord as varchar(140)) = t30.code
+where t00.realvrid = '...'
+ ) t1
+
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>std-vr-metid</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.sql</scope>
+</snippet>

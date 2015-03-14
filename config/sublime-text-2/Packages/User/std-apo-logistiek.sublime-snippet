@@ -1,0 +1,68 @@
+<snippet>
+	<content><![CDATA[
+
+drop table #apotheek
+select * into #apotheek
+from (
+select  
+	cast(logistk_artmut_tabel.invdatum as date) datum,
+	case when (logistk_artmut_ext.kostencode is null) or (logistk_artmut_ext.kostencode = '') 
+	     then logistk_magazijn.ziccode 
+	     else logistk_artmut_ext.kostencode end as lokatie,
+	logistk_artikel.artcode,
+	logistk_artikel.omschr,
+	arcode as atc_code,
+	logistk_arc.omschr as atc_omschr,
+	case when muttype = '20' then logistk_artmut_tabel.aantalverp else -1 * logistk_artmut_tabel.aantalverp end aantal,
+	case when muttype = '20' then (logistk_artmut_tabel.kaeontv/logistk_artikel.aantalkae) * logistk_artikel.vvp else  (logistk_artmut_tabel.kaeontv/logistk_artikel.aantalkae) * logistk_artikel.vvp end as bedrag
+from [dbo].ezis_logistk_artmut_tabel logistk_artmut_tabel 
+  join [dbo].ezis_logistk_artikel logistk_artikel 
+   on logistk_artikel.artcode = logistk_artmut_tabel.artcode 
+  join [dbo].ezis_logistk_magazijn logistk_magazijn 
+   on logistk_magazijn.magcode = logistk_artmut_tabel.magcode	
+  left outer join [dbo].ezis_logistk_artmut_ext logistk_artmut_ext 
+   on logistk_artmut_ext.objectid1 = logistk_artmut_tabel.mutid 
+  left join [dbo].ezis_logistk_arc logistk_arc 
+   on arcode = logistk_arc.arccode
+where muttype in ('20','22')
+ and logistk_artmut_tabel.vervallen = 0
+union all
+select 
+	cast(logistk_artmut_tabel.invdatum as date) datum,
+	case when (logistk_artmut_ext.kostencode is null) or (logistk_artmut_ext.kostencode = '') 
+	     then logistk_magazijn.ziccode 
+	     else logistk_artmut_ext.kostencode  end as lokatie,
+	logistk_artikel.artcode,
+	logistk_artikel.omschr,
+	arcode as atc_code,
+	logistk_arc.omschr as atc_omschr,
+	case when muttype in ('30','34') 
+	     then logistk_artmut_tabel.aantalverp 
+	     else -1 * logistk_artmut_tabel.aantalverp end aantal,
+	case when muttype in ('30','34') 
+         then (logistk_artmut_tabel.kaeuitg/logistk_artikel.aantalkae) * logistk_artikel.vvp 
+         else (logistk_artmut_tabel.kaeuitg/logistk_artikel.aantalkae) * logistk_artikel.vvp end as bedrag
+from dbo.ezis_logistk_artmut_tabel logistk_artmut_tabel 
+  join dbo.ezis_logistk_artikel logistk_artikel 
+   on logistk_artikel.artcode = logistk_artmut_tabel.artcode 
+  join dbo.ezis_logistk_magazijn logistk_magazijn 
+   on logistk_magazijn.magcode = logistk_artmut_tabel.magcode	
+  left outer join dbo.ezis_logistk_artmut_ext logistk_artmut_ext 
+   on logistk_artmut_ext.objectid1 = logistk_artmut_tabel.mutid 
+  left join [dbo].ezis_logistk_arc logistk_arc 
+   on arcode = logistk_arc.arccode
+where muttype in ('34','30','32')
+and logistk_artmut_tabel.vervallen = 0
+) t1 
+
+select*
+from #apotheek
+where ATC_CODE = ''
+order by 1
+
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>std-apo-logistiek</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.sql</scope>
+</snippet>
