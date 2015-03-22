@@ -1,0 +1,10 @@
+<snippet>
+	<content><![CDATA[
+declare @rapportage_jaar integer
+set     @rapportage_jaar = 
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>std-per</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.sql</scope>
+</snippet>

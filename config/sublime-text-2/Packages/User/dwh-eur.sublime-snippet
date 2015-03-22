@@ -1,0 +1,24 @@
+<snippet>
+	<content><![CDATA[
+Collega's,
+
+De EURO's zijn definitief dus we hebben de EUR gerelateerde DWH producten ook bijgewerkt:
+
+Berekenen kostprijzen per maand (KPM) is gedaan. Onze vraag is of iemand deze gegevens nog gebruikt.
+Maandcijfers - EUR  => http://dwh.mch.nl/maandcijfers
+Maandcijfers - Collectief => http://dwh.mch.nl/maandcijfers-coll2
+
+De losse SQLs voor Corrie staan in de correcte directory.
+
+Alleen PIT is niet bijgewerkt, want daar moeten we nog aanpassingen op doen ism Arthur.
+
+Vergeet niet bij akkoord een vinkje te zetten op geven op:
+
+http://dwh.mch.nl/akkoord/
+
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>dwh-eur</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

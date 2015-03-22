@@ -1,0 +1,96 @@
+<snippet>
+	<content><![CDATA[
+
+/*
+|| zoeken naar vraag/stelling/antwoord. Je hebt nog wel een basisset nodig
+*/
+
+select
+    t10.vraagid,
+    t10.stelling,
+    t10.korteoms,
+    t10.categorie
+from [nt-dk-mn-zis-p1].ezis_prod_logshipping.dbo.vrlijst_vragen t10
+where t10.stelling like '% %'
+ and t10.VERVALLEN = 0
+
+/*
+|| Vragen antwoorden bij elkaar
+|| Let op: de datum is de datum van de vraag. Datum lijst komt uit VR
+|| Wil je de datum lijstbeantwoording neem dat de tweede selectie(mee)
+|| Je moet dan wel de namen aanpassen(datumlijst vs datumvraag)
+*/
+
+drop table #patient_vragen
+select * into #patient_vragen
+from (
+select
+  t00.patientnr,
+  t00.opslagid,
+  t00.datum as datumvraag,
+  t10.stelling,
+  t00.realvrid,
+  t10.keuzelijst,
+  t00.beantwid,
+  cast(t00.antwoord as varchar(4000)) as antwoord
+from [nt-dk-mn-zis-p1].ezis_prod_logshipping.dbo.vrlijst_vropslg t00
+ join [nt-dk-mn-zis-p1].ezis_prod_logshipping.dbo.vrlijst_vragen t10
+  on t00.realvrid = t10.vraagid
+where t10.vraagid in (' ')
+ and t00.datum > ''
+ ) t1
+
+drop table #patient_vragenlijst
+select * into #patient_vragenlijst
+from (
+select distinct
+  t00.datum as datumlijst,
+  t00.patnr,
+  t00.opslagid,
+  t00.koppelid,
+  t00.datum,
+  t10.beantwid
+from [nt-dk-mn-zis-p1].ezis_prod_logshipping.dbo.VRLIJST_LSTOPSLG t00
+ left join [nt-dk-mn-zis-p1].ezis_prod_logshipping.dbo.VRLIJST_VROPSLG t10
+  on t00.opslagid = t10.beantwid
+-- Optioneel: beperk de set met een selectie van patienten
+-- left join #basis t20  
+--  on t00.patnr = t20.patientnr
+--   and t00.datum = t20.datum
+where t00.lijstid in ( '' )
+  and YEAR(t00.datum) = 
+ ) t1
+
+-- vragen antwoorden bij elkaar
+
+drop table #vragenantwoorden
+select * into #vragenantwoorden
+from (
+select
+  t10.patientnr as patientnummer, 
+  t10.datumvraag , 
+  t10.keuzelijst, 
+  case when t10.realvrid = ' ' then t10.antwoord else null end as [ ]
+  case when cast(t20.omschr as varchar) = ' ' then t10.antwoord else null end as [ ]
+from #patient_vragen t10
+ left join [nt-dk-mn-zis-p1].ezis_prod_logshipping.dbo.vrlijst_keuzelst t20
+  on cast(t10.antwoord as varchar(140)) = t20.code
+) t3
+
+-- output
+
+select
+ patientnummer,
+ cast(datumvraag as date) datumvraag,
+ max([ ]) as [ ],
+from #vragenantwoorden
+group by
+ patientnummer,
+ datumvraag
+
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>sql-vragenlijst-std</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.sql</scope>
+</snippet>

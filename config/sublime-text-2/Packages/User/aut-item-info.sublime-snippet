@@ -1,0 +1,16 @@
+<snippet>
+  <content><![CDATA[
+select 
+  t00.rec_id,
+  t00.item_code,
+  t00.item_oms,
+  t00.item_info,
+  t00.item_type,
+  t00.mut_dat
+from [nt-vm-dwh-p2].dwh_general.dbo.aut_items t00
+]]></content>
+  <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+  <tabTrigger>aut-item-info</tabTrigger> 
+  <!-- Optional: Set a scope to limit where the snippet will trigger -->
+  <!-- <scope>source.python</scope> -->
+</snippet>

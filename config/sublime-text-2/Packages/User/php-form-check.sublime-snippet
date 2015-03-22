@@ -1,0 +1,20 @@
+<snippet>
+  <content><![CDATA[
+
+\$name = \$email = "";
+
+function t_input(\$data) {
+  \$data = trim(\$data);
+  \$data = stripslashes(\$data);
+  \$data = htmlspecialchars(\$data);
+  return \$data;
+}
+
+\$name = t_input(\$_POST["name"]);
+
+]]></content>
+  <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+  <tabTrigger>php-form-check</tabTrigger>
+  <!-- Optional: Set a scope to limit where the snippet will trigger -->
+  <scope>source.php</scope>
+</snippet>

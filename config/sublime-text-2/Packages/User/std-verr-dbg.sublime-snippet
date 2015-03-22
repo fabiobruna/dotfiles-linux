@@ -1,0 +1,53 @@
+<snippet>
+	<content><![CDATA[
+drop table #ver
+select * into #ver
+from (
+select
+  t00.dbc_nummer,
+  t00.verrichtingsjaar,
+  t00.verrichtingsmaand,
+  t00.specialist,
+  t00.specialisme_agb_code,
+  t00.specialisme_omschr,
+  t00.kostenplaats_code,
+  t00.kostenplaats,
+  t00.kostenplaats_locatie,
+  t00.functiegroep_code,
+  t00.functiegroep,
+  t00.divisie_code,
+  t00.divisie,
+  t00.afdeling,
+  t00.afdeling_omschr,
+  t00.cbv_verr_code,
+  t10.cbv_verrichting_omschr as cbv_verr_oms,
+  t10.ctg_verrichting_code as ctg_verr_code,
+  t10.ctg_verrichting_omschr as ctg_verr_oms,
+  t00.verrichting_omschr,
+  t00.uitvoerder_code,
+  t20.specialist_naam as specialist_naam_uitvoerder,
+  t20.specialisme_code as specialisme_uitvoerder,
+  t00.aanvrager_code,
+  t30.specialist_naam as specialist_naam_aanvrager,
+  t30.specialisme_code as specialisme_aanvrager,
+  t00.aantal
+from dbg_bedrijfsinfo_verrichtingen t00
+ join dim_cbv_verrichting t10
+  on t00.cbv_verr_code = t10.cbv_verrichting_code
+ join dim_specialist t20
+  on t00.uitvoerder_code = t20.specialist_code
+ join dim_specialist t30
+  on t00.aanvrager_code = t30.specialist_code
+) t1
+
+select *
+from #ver
+order by
+  verrichtingsjaar,
+  verrichtingsmaand
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>std-verr-dbg</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.sql</scope>
+</snippet>

@@ -1,0 +1,11 @@
+<snippet>
+	<content><![CDATA[
+DECLARE @cmd varchar(1000)
+SET @cmd = 'bcp "SELECT * FROM [nt-dk-dwh-p].dwh_ezis.dbo.tabelnaam" queryout "\\mchaaglanden\mchdfs\DWH\Algemeen\bestanden\uit\textfile.txt" -c -UTF8 -T -Slocalhost'
+EXEC master..xp_cmdshell @cmd
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet  -->
+	<tabTrigger>sql-bcp</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.sql</scope>
+</snippet>

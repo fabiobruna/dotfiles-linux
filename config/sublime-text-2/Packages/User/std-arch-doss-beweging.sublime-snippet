@@ -1,0 +1,48 @@
+<snippet>
+	<content><![CDATA[
+
+-- Hier zit de laatste archiefbewerking in(optioneel)
+
+drop table #laatstebew
+select * into #laatstebew from (
+select
+ t00.dossierid, max(t00.behid) behid 
+from [nt-dk-mn-zis-p1].ezis_prod_logshipping.dbo.archief_archbew t00
+group by
+ t00.dossierid
+) t0 
+
+drop table #basis
+select * into #basis
+from (
+select
+ t00.dossierid,
+ t00.bandnr,
+ cast(t00.datumaanm as date) datumaanm,
+ cast(t10.datumterug as date) datumterug,
+ t00.patientnr,
+ t00.dosstype dossiertype,
+ case when ISNULL(t10.archief, '') = '' then 'lener' else 'locatie' end as bron,
+ case when ISNULL(t10.archief, '') = '' then  t10.lener else t10.archief end as locatielener,
+ t00.instantie,
+ t10.EXTRASTAT,
+ t10.status,
+ case when t00.INSTANTIE = 'X' and t10.STATUS = '3' then 'J' else 'N' end as [verwijderd],
+ case when t00.INSTANTIE = 'X' and t10.STATUS = '1' then 'J' else 'N' end as [registratiefout]
+from [nt-dk-mn-zis-p1].ezis_prod_logshipping.dbo.ARCHIEF_ARCHDOSS t00
+ join [nt-dk-mn-zis-p1].ezis_prod_logshipping.dbo.ARCHIEF_ARCHBEW t10
+  on t00.DOSSIERID = t10.DOSSIERID
+ join #laatstebew t20        -- optioneel als je alleen de laatste beweging wil zien
+   on t10.behid = t20.behid  
+) t1
+
+select *
+from #basis
+order by patientnr, datumaanm, datumterug
+
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>std-arch-doss-beweging</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.sql</scope>
+</snippet>

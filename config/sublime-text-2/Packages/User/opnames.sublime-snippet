@@ -1,0 +1,43 @@
+<snippet>
+	<content><![CDATA[
+
+drop table #opnames
+select * into #opnames
+from (
+select
+  t00.plannr                              as opnamenummer,
+  t00.specialism                          as specialisme,
+  t00.patientnr                           as patientnummer,
+  t00.afdeling,
+  cast(t00.opndat as date) opnamedatum,
+  t00.opntijd opnametijd,
+  cast(t00.ontsldat as date) ontslagdatum,
+  t00.ontsltijd ontslagtijd,
+  t00.opndat+t00.opntijd as opnamedatumtijd,
+  t00.ontsldat+t00.ontsltijd as ontslagdatumtijd,
+  t00.opntype,
+  t10.omschr typeomschrijving,
+  t10.categorie,
+  case 
+  when t00.status = '0' then 'Geannuleerd'
+  when t00.status = '1' then 'Wachtlijst'
+  when t00.status = '2' then 'Gepland'
+  when t00.status = '3' then 'Opgeroepen'
+  when t00.status = '4' then 'Opgenomen'
+  when t00.status = '5' then 'Ontslagen'
+  when t00.status = '9' then 'Gefactureerd '
+  else 'Onbekend' end as [status oms]
+from ezis_opname_opname t00
+  left join [nt-dk-mn-zis-p1].ezis_prod_logshipping.dbo.opname_opntype1 t10
+   on t00.opntype = t10.code  
+where t00.status in (4,5)
+) t1
+
+select *
+from #opnames
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>std-opnames</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.sql</scope>
+</snippet>

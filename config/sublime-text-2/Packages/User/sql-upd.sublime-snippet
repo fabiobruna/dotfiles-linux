@@ -1,0 +1,14 @@
+<snippet>
+	<content><![CDATA[
+UPDATE t00
+  SET t00.a = t10.b
+  FROM AA as t00
+  INNER JOIN BB AS t10
+  ON t00.XXX = t10.XX
+  WHERE t00.YYY = '110'
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>sql-upd</tabTrigger> 
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.sql</scope> 
+</snippet>

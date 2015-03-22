@@ -1,0 +1,29 @@
+<snippet>
+	<content><![CDATA[
+SELECT bew.[ID]
+      ,[OBJECT_ID]
+      ,[DATUM]
+      ,[TIJD]
+      ,[LOCATIE_ID]
+      ,loc.NAAM
+      ,[MEDEW_ID]
+      ,[STATUS_ID]
+      ,[OPMERKING]
+      ,[GEWICHT]
+      ,[GWAFWRCODE]
+      ,[BATCH_ID]
+      ,[PRIORITEIT]
+      ,[SNDEF_ID]
+      ,[SNVNET_ID]
+      ,[PRRUN_ID]
+  FROM [dbo].[STERIEL_BEWEGINGEN] bew
+   left join [dbo].[STERIEL_LOCATIES] loc
+    on bew.LOCATIE_ID = loc.ID
+  where year(DATUM) >= '2012'
+  and OBJECT_ID like 'N%'
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>std-ezis-netten-beweging</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.sql</scope>
+</snippet>

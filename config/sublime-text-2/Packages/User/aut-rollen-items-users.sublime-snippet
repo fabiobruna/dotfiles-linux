@@ -1,0 +1,25 @@
+<snippet>
+  <content><![CDATA[
+select distinct
+  t05.rec_id as rec_id_rol
+, t05.rol_oms
+, t00.rec_id_items
+, t25.item_code as item_code_van_rol
+, t25.item_oms as item_oms_van_rol
+, t10.rec_id_users
+, t40.user_naam
+from [nt-vm-dwh-p2].dwh_general.dbo.aut_rollen_has_items t00
+ join [nt-vm-dwh-p2].dwh_general.dbo.aut_rollen t05
+  on t00.rec_id_rollen = t05.rec_id             -- omschrijving rol
+ left join [nt-vm-dwh-p2].dwh_general.dbo.aut_users_has_rollen t10
+  on t00.rec_id_rollen = t10.rec_id_rollen
+ left join [nt-vm-dwh-p2].dwh_general.dbo.aut_items t25
+  on t00.rec_id_items = t25.rec_id  -- items van een rol
+ left join [nt-vm-dwh-p2].dwh_general.dbo.aut_users t40
+  on t10.rec_id_users = t40.rec_id
+]]></content>
+  <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+  <tabTrigger>aut-rollen-items-users</tabTrigger>
+  <!-- Optional: Set a scope to limit where the snippet will trigger -->
+  <!-- <scope>source.python</scope> -->
+</snippet>

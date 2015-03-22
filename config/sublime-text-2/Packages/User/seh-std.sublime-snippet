@@ -1,0 +1,43 @@
+<snippet>
+	<content><![CDATA[
+
+declare @start date
+declare @eind date
+
+select @start = '20131201'
+select @eind = '20131231'
+
+drop table #seh
+select * into #seh
+from (
+select
+	t00.SEHID,
+	t00.patientnr as patientnummer,
+ 	t00.locatiecod,
+	cast(t00.datum as date) as datum_seh,
+	t00.klacht,
+	t00.DOORWIE,
+	t00.BESTEMMING as BESTEMMING_code,
+	t10.OMSCHRIJVI as bestemming_oms,
+	t00.vervoertyp,
+	t00.URGENTIE as urgentie_code,
+	t20.OMSCHR as urgentie_oms
+from ezis_seh_sehreg t00
+ left join [nt-dk-mn-zis-p1].ezis_prod_logshipping.dbo.SEH_SHBESTEM t10
+  on t00.BESTEMMING = t10.code 
+ left join [nt-dk-mn-zis-p1].ezis_prod_logshipping.dbo.SEH_SEHURGEN t20
+  on t00.URGENTIE = t20.URGNIV 
+where t00.datum between @start and @eind
+ and t00.VERVALL = 0
+) t1
+
+select *
+from #seh
+order by datum_seh
+
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>seh-std</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.sql</scope>
+</snippet>

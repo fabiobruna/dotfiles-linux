@@ -1,0 +1,11 @@
+<snippet>
+	<content><![CDATA[
+ cast(floor(DATEDIFF(minute, XXdatumXX, XXdatumXX)/60.0) as varchar(max))
+      +':'+
+     cast(cast((DATEDIFF(minute, XXdatumXX, XXdatumXX)/60.0 - floor(DATEDIFF(minute, XXdatumXX, XXdatumXX)/60.0))*60 as int) as varchar(max)) as [verschil H:MM]
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>std-time-hh-mi</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.sql</scope>
+</snippet>
