@@ -41,6 +41,8 @@ from ezis_ok_okinfo t00
   on t00.aanvr_spec = t20.arts_code
  left join ezis_specialisten t30
   on t00.snijd_spec = t30.arts_code
+-- left join [nt-dk-mn-zis-p1].ezis_prod_logshipping.dbo.OK_OKINFO_EXT t40
+--  on t00.OPERATIENR = t10.objectid0
 where year(t00.operatie_d) = 2010
  and case when isnull(t10.specialism, '') = '' 
           then t00.specialism 

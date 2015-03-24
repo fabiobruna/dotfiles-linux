@@ -56,3 +56,4 @@ Control.system-ca-bundle
 Control.cache/
 Control.ca-certs/
 config/sublime-text-2/Backup/
+config/sublime-text-2/Packages/User/php.sublime-build

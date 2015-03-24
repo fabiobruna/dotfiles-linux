@@ -4,10 +4,13 @@
 	],
 	"installed_packages":
 	[
+		"ColorPicker",
+		"Format SQL",
 		"InsertDate",
-		"Jade",
-		"Markdown Extended",
+		"JsFormat",
+		"JSHint",
 		"Package Control",
-		"SCSS"
+		"PHPUnit Snippets",
+		"SublimeLinter"
 	]
 }
