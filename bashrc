@@ -62,9 +62,13 @@ alias gg='history | grep'
 alias ll="ls -lrt"
 alias lsd="ls -ld .*/"
 alias dot='ls .[a-zA-Z0-9_]*'
-alias breakitdown="history | awk '{a[$2]++ } END{for(i in a){print a[i] ' ' i}}'|sort -rn |head -n 20"
+# alias breakitdown="history | awk '{a[$2]++ } END{for(i in a){print a[i] ' ' i}}'|sort -rn |head -n 20"
 alias ack='ack-grep'
-alias t="todo.sh"
+
+# Todo.txt
+
+export TODOTXT_DEFAULT_ACTION=ls
+alias t='todo.sh -d ~/scripts/todo.cfg'
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
