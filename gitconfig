@@ -1,7 +1,8 @@
 [color]
-	ui = auto
+	ui = true
 [core]
 	autocrlf = input
+	editor = subl -n -w
 [user]
 	name = Fabio Bruna
 	email = koetjeboeh@gmail.com
