@@ -336,7 +336,7 @@
 	<key>NSWindow Frame Preferences</key>
 	<string>166 300 924 485 0 0 1440 900 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>49 0 1391 900 0 0 1440 900 </string>
+	<string>51 0 1389 877 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>183 68 650 401 0 0 1440 900 </string>
 	<key>New Bookmarks</key>
@@ -1072,9 +1072,9 @@
 	<key>NoSyncTimeOfLastPromo</key>
 	<real>453751607.131253</real>
 	<key>NoSyncTimeOfLastPromoDownload</key>
-	<real>470690713.41767901</real>
+	<real>475358647.14966297</real>
 	<key>OnlyWhenMoreTabs</key>
-	<true/>
+	<false/>
 	<key>OpenArrangementAtStartup</key>
 	<true/>
 	<key>OpenBookmark</key>
@@ -1121,7 +1121,7 @@
 	<key>PrefsCustomFolder</key>
 	<string>/Users/fabiobruna/repos/dotfiles-linux/config/</string>
 	<key>PromptOnQuit</key>
-	<true/>
+	<false/>
 	<key>QuitWhenAllWindowsClosed</key>
 	<false/>
 	<key>RightCommand</key>
@@ -1135,7 +1135,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2015-12-01T18:59:28Z</date>
+	<date>2016-01-24T19:55:11Z</date>
 	<key>SavePasteHistory</key>
 	<false/>
 	<key>Show Toolbelt</key>
