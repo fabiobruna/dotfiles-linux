@@ -70,6 +70,7 @@ alias lsd="ls -ld .*/"
 alias dot='ls .[a-zA-Z0-9_]*'
 # alias breakitdown="history | awk '{a[$2]++ } END{for(i in a){print a[i] ' ' i}}'|sort -rn |head -n 20"
 alias ack='ack-grep'
+alias expose='~/repos/website/expose.sh'
 
 # Todo.txt
 
