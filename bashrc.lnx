@@ -1,6 +1,9 @@
     # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
+HOME=/home/fabio
+export HOME
+
 # don't put duplicate lines in the history. See bash(1) for more options
 # don't overwrite GNU Midnight Commander's setting of `ignorespace'.
 HISTCONTROL=$HISTCONTROL${HISTCONTROL+,}ignoredups
@@ -64,6 +67,8 @@ alias dot='ls .[a-zA-Z0-9_]*'
 # alias breakitdown="history | awk '{a[$2]++ } END{for(i in a){print a[i] ' ' i}}'|sort -rn |head -n 20"
 alias ack='ack-grep'
 
+alias expose="/home/fabio/repos/Expose/expose.sh"
+
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
@@ -94,3 +99,4 @@ export SENCHA_CMD_3_0_0=$HOME/io/bin/Sencha/Cmd/4.0.0.203
 PATH=$PATH:/usr/local/bin
 # added by Anaconda3 2.4.1 installer
 export PATH="/home/fabio/anaconda3/bin:$PATH"
+
