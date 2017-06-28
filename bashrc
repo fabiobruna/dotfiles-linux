@@ -101,8 +101,6 @@ export HISTIGNORE="&:[ ]*:ls:ll:la:l:cd:pwd:exit:mc:su:df:clear"
 
 PATH=$PATH:~/bin
 export PATH
-export PATH=/home/fabio/bin/Sencha/Cmd/4.0.0.203:$PATH
-export SENCHA_CMD_3_0_0=$HOME/io/bin/Sencha/Cmd/4.0.0.203
 PATH=$PATH:/usr/local/bin
 export PATH="/Users/fabiobruna/bin/Sencha/Cmd/6.0.1.76/..:$PATH"
 # added by Anaconda3 2.4.1 installer
