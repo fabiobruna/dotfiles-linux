@@ -50,8 +50,11 @@ fi
 
 # git completion mac
 
-if [ -f `brew --prefix`/etc/bash_completion ]; then
-    . `brew --prefix`/etc/bash_completion
+which -s brew
+if [[ $? = 0 ]] ; then
+    if [ -f `brew --prefix`/etc/bash_completion ]; then
+        . `brew --prefix`/etc/bash_completion
+    fi
 fi
 
 # Alias definitions.
