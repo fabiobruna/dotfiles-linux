@@ -50,7 +50,7 @@ fi
 
 # git completion mac
 
-which -s brew
+which brew
 if [[ $? = 0 ]] ; then
     if [ -f `brew --prefix`/etc/bash_completion ]; then
         . `brew --prefix`/etc/bash_completion
